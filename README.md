@@ -42,6 +42,10 @@ Here were all the libraries, frameworks and packages I used for creating this pr
 - Page load time measures how long it takes for the contents of a website to show up in the user’s browser. The loading process of a website will consist of multiple milestones, for example starting to show text or displaying a hero image.
 
 - For this website I measured the Page Load time after deploying this website and measured its data from Google’s Page speed insights.
+- My First Contentful and largest Contentful Paint came out to be 0.8s
+- My Total Blocking time was 0 sec
+- My speed index was 1.2 sec
+
 - The page load time of website depends on the Server Response time, download Sizes and Rendering Times. I did certain optimizations to decrease the load time of my applications some of them being: -
 
 # Optimisations
@@ -50,4 +54,5 @@ Here were all the libraries, frameworks and packages I used for creating this pr
 2.	I downloaded low-resolution images instead of extracting them from the webserver contributing to a quicker load time.
 3.	I used Vite Application very conservatively and deleted all the components that were not in use so that My website Size would reduce.
 4.	I fetched the data quickly through Mock Backend JSON Server Made personally by me on my GitHub so that fast Fetching could take place.
+5. I reduced unused scripts and CSS
 
