@@ -3,7 +3,7 @@ import DisplayCard from "./DisplayCard";
 function ComputerVision({ data }) {
   return (
     <>
-      <div className="px-20 flex flex-wrap justify-center">
+      <div className="px-14 flex flex-wrap justify-center">
         Computer vision, a type of artificial intelligence, enables computers to
         interpret and analyze the visual world, simulating the way humans see
         and understand their environment. It applies machine learning models to

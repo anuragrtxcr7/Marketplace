@@ -3,7 +3,7 @@ import DisplayCard from "./DisplayCard";
 function Try_it_out({ data }) {
   return (
     <>
-      <div className="px-20 flex flex-wrap justify-center">
+      <div className="px-14 flex flex-wrap justify-center">
         Here are some Models that are available for trying out
       </div>
       <br />

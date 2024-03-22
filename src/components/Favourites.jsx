@@ -3,7 +3,7 @@ import DisplayCard from "./DisplayCard";
 function Favourites({ data }) {
   return (
     <>
-      <div className="px-20 flex flex-wrap justify-center">
+      <div className="px-14 flex flex-wrap justify-center">
         Here contain some Models that are kinda Favourites or we could say are
         more liked than the others. The main reason behind this is Accessiblity.
         The following models are friendly for both Users and Developers who are

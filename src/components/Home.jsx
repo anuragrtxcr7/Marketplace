@@ -3,7 +3,7 @@ import DisplayCard from "./DisplayCard";
 function Home({ data }) {
   return (
     <>
-      <div className="px-24 flex flex-wrap justify-center">
+      <div className="px-14 flex flex-wrap justify-center">
         Welcome to Large Language Model/Artificial Intelligence Market Place. A
         large language model is a language model notable for its ability to
         achieve general-purpose language generation and other natural language

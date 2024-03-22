@@ -3,7 +3,7 @@ import DisplayCard from "./DisplayCard";
 function TransformerBased({ data }) {
   return (
     <>
-      <div className="px-20 flex flex-wrap justify-center">
+      <div className="px-14 flex flex-wrap justify-center">
         Transformer models modify this process by incorporating something called
         a self-attention mechanism. Instead of processing data in order, the
         mechanism enables the model to look at different parts of the sequence

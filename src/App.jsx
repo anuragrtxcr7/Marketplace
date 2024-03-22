@@ -5,7 +5,7 @@ import {NextUIProvider} from '@nextui-org/react'
 import Homepage from "./components/Homepage";
 import Home from "./components/Home";
 import Favourites from "./components/Favourites";
-import Try_it_out from "./components/Favourites";
+import Try_it_out from "./components/Try_it_out";
 import SpeechRecognition from "./components/SpeechRecognition";
 import ComputerVision from "./components/ComputerVision";
 import ReinforcementLearning from "./components/ReinforcementLearning";
