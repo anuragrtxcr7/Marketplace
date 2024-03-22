@@ -48,11 +48,11 @@ function ReadMore({ data }) {
         <ol>
           <li>
             {data
-              ? data[modelid].use_case.map((ele) => {
+              ? data[modelid].use_case.map((ele,i) => {
                   return (
-                    <text className="flex justify-center font-semibold">
+                    <div className="flex justify-center font-semibold" key={i}>
                       {ele}
-                    </text>
+                    </div>
                   );
                 })
               : null}

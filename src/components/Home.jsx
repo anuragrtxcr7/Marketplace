@@ -16,14 +16,16 @@ function Home({ data }) {
       </div>
       <br />
       <div className="flex flex-wrap justify-center">
-        {data?.map((dat) => {
+      {data?.map((dat,i) => {
           return (
-            <DisplayCard
+            <div key={i}>
+              <DisplayCard
               id={dat.id}
               name={dat.name}
               developer={dat.developer}
               tryout={dat.try_out}
             />
+            </div>
           );
         })}
       </div>
