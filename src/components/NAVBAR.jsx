@@ -98,7 +98,6 @@ export default function NAVBAR() {
               <DropdownItem
                 key="autoscaling"
                 startContent={icons.scale}
-                href="/speech"
               >
                 <NavLink
                   to="speech"
