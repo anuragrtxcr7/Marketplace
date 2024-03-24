@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
 
 function ReadMore({ data }) {
   const { modelid } = useParams();
   const [description, setDescription] = useState("");
+  const gg = JSON.parse(localStorage.getItem(`${modelid}`));
+  const [extra, setExtra] = useState(gg ? gg : "");
+
+  useEffect(() => {
+    localStorage.setItem(`${modelid}`, JSON.stringify(extra));
+  }, [extra]);
+
   if (data === null || data === undefined) {
-    console.error("null data");
   } else {
     if (description == "") {
       setDescription(data[modelid].description);
@@ -48,7 +54,7 @@ function ReadMore({ data }) {
         <ol>
           <li>
             {data
-              ? data[modelid].use_case.map((ele,i) => {
+              ? data[modelid].use_case.map((ele, i) => {
                   return (
                     <div className="flex justify-center font-semibold" key={i}>
                       {ele}
@@ -62,7 +68,7 @@ function ReadMore({ data }) {
         <h1 className="flex justify-center ">Description</h1>
         <br />
         <div className="flex px-28 font-medium desc">
-          {data ? description : null}
+          {data ? description + extra : null}
         </div>
       </div>
       <br></br>
@@ -82,7 +88,7 @@ function ReadMore({ data }) {
             className="m-1 rounded-2xl"
             onClick={(e) => {
               setVal("");
-              setDescription((past) => past + val);
+              setExtra((past) => past + " " + val + ".");
             }}
           >
             Submit
