@@ -19,6 +19,10 @@ Currently, two official plugins are available:
 
 - This Try out page was little special and tricky because here I read, interacted and observed various APIs of famous LLM’s and how they function. On understanding them, I Integrated these APIs into my webpage so that a preview could be used by the users on how these Models really function. After Integration I used users Responses to enable them to interact with the models through UI components bought to life by the API’s Endpoint and their Algorithm.
 
+# Uploading Info in Explore Space
+
+- This is a feature that gives a space for providers to upload information about their models, so that they can be shown in the “Explore” space. I integrated input textboxes for having user input their information and then managing the state of the entered text with the previously entered one through local storage so that this ties in seamlessly with the Application built.
+
 # React-Router-Linking
 
 - I linked all these pages using React-Router as it reduces the number of times the application Renders. I created this Project with a JavaScript Framework known as ReactJs and deployed it using Vercel . Here I used the web Builder Bundler Vite over Create React App because it provides a faster spin-up off the development server.
