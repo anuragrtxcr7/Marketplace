@@ -33,7 +33,7 @@ function TryGemini() {
 
   const handle = async () => {
     setIsLoading(true);
-    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const prompt = promptt;
     setPromptt("");
     const imageParts = await Promise.all(
