@@ -1,92 +1,134 @@
-import { useState } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import React, { useState } from "react";
+import { GoogleGenAI } from "@google/genai";
 import { Button } from "@nextui-org/react";
 
-import React from "react";
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const ai = new GoogleGenAI({
+  apiKey: import.meta.env.VITE_GEMINI_API_KEY,
+});
 
 function TryGemini() {
-  const [generativeText, setGenerativeText] = useState("");
-  const [file, setFile] = useState();
-  const [imageURL, setImageURL] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [promptt, setPromptt] = useState("");
-
-  // Access your API key (see "Set up your API key" above)
-  const genAI = new GoogleGenerativeAI(API_KEY);
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onFileChange = (e) => {
-    setFile(e.target);
-    setImageURL(URL.createObjectURL(e.target.files[0]));
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
   };
 
-  async function fileToGenerativePart(file) {
-    const base64EncodedDataPromise = new Promise((resolve) => {
+  async function fileToBase64(file) {
+    return new Promise((resolve) => {
       const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result.split(",")[1]);
+
+      reader.onload = () => {
+        resolve(reader.result.split(",")[1]);
+      };
+
       reader.readAsDataURL(file);
     });
-    return {
-      inlineData: { data: await base64EncodedDataPromise, mimeType: file.type },
-    };
   }
 
   const handle = async () => {
-    setIsLoading(true);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const prompt = promptt;
-    setPromptt("");
-    const imageParts = await Promise.all(
-      [...file.files].map(fileToGenerativePart)
-    );
+    try {
+      setLoading(true);
 
-    const result = await model.generateContent([prompt, ...imageParts]);
-    setGenerativeText(result.response.text());
-    setIsLoading(false);
+      let input;
+
+      if (image) {
+        const base64 = await fileToBase64(image);
+
+        input = [
+          {
+            type: "text",
+            text: prompt,
+          },
+          {
+            type: "image",
+            mime_type: image.type,
+            data: base64,
+          },
+        ];
+      } else {
+        input = prompt;
+      }
+
+      const interaction = await ai.interactions.create({
+        model: "gemini-3.6-flash",
+        input,
+      });
+
+      setResponse(interaction.output_text);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+
+    setLoading(false);
   };
 
   return (
     <>
-      <h1 className="flex justify-center text-cyan-400">
-        Gemini's Image to Text AI
+      <h1 className="flex justify-center text-cyan-400 text-3xl">
+        Gemini Image + Text
       </h1>
+
       <br />
-      <p className="flex justify-center">
-        {" "}
-        Image and Text Prompt asking questions about the Image to Text
-      </p>
-      <br />
-      <br />
+
       <div className="flex justify-center">
-        <input type="file" onChange={onFileChange} />
-      </div>
-      <br></br>
-      <div className="flex justify-center">
-        <img className="w-80 h-52" src={imageURL} />
-      </div>
-      <div className="flex justify-center m-3 text-white ">
         <input
-          className="rounded-3xl px-3"
-          type="text"
-          value={promptt}
-          onChange={(e) => setPromptt(e.target.value)}
-          placeholder="Enter Prompt"
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
         />
+      </div>
+
+      <br />
+
+      {preview && (
+        <div className="flex justify-center">
+          <img
+            src={preview}
+            alt=""
+            className="w-80 rounded-lg"
+          />
+        </div>
+      )}
+
+      <br />
+
+      <div className="flex justify-center gap-3">
+        <input
+          className="rounded-xl px-4 py-2 text-black w-96"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Ask something..."
+        />
+
         <Button
-          className="flex justify-center m-2"
           color="primary"
           onClick={handle}
         >
-          Generate Text
+          Ask Gemini
         </Button>
       </div>
-      {isLoading ? (
-        <p className="flex justify-center">Your Response is being loaded ...</p>
-      ) : (
-        <div className="flex justify-center p-3 flex-wrap">
-          {generativeText}
-        </div>
-      )}
+
+      <br />
+
+      <div className="flex justify-center">
+        {loading ? (
+          <p>Generating...</p>
+        ) : (
+          <div className="max-w-4xl whitespace-pre-wrap">
+            {response}
+          </div>
+        )}
+      </div>
     </>
   );
 }

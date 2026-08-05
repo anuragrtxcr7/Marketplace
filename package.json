@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^2.0.3",
-    "@google/generative-ai": "^0.3.0",
+    "@google/genai": "^2.15.0",
+    "@google/generative-ai": "^0.24.1",
     "@nextui-org/react": "^2.2.10",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",

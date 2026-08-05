@@ -54,7 +54,7 @@ function TryGPT() {
     });
 
     const apiRequestBody = {
-      model: "gpt-3.5-turbo",
+      model: "gpt-5-mini",
       messages: [systemMessage, ...apiMessages],
     };
 
@@ -85,7 +85,7 @@ function TryGPT() {
   return (
     <div className="bg-black">
       <h1 className="flex justify-center text-cyan-400">
-        Chat GPT-3.5-Turbo Preview
+        Chat GPT-5 Mini Preview
       </h1>
       <br />
       <div className="App flex justify-center ">
