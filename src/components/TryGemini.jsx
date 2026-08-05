@@ -56,6 +56,7 @@ function TryGemini() {
         ];
       } else {
         input = prompt;
+        
       }
 
       const interaction = await ai.interactions.create({
